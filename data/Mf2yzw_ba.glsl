@@ -19,8 +19,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ){
     vec2 px = 1. / iResolution.xy;
     vec3 e = vec3(1, 0, -1);
 	vec2 lap = vec2(tx(uv + e.xy * px).y - tx(uv - e.xy * px).y, tx(uv + e.yx * px).y - tx(uv - e.yx * px).y);
-    uv = uv + lap * px * 2.;
+    uv = uv + px * floor(lap * 10. + .5);
     vec2 f = tx(uv).xy;
-	float newReactDiff = f.x + .1 * (f.x -  f.y) - .003;
+	float newReactDiff = f.x + .08 * (f.x -  f.y) - .005;
     fragColor = vec4(clamp(newReactDiff, 0., 1.), avgReactDiff / .98, 0., 0.);
 }
